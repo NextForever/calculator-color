@@ -42,11 +42,11 @@ const ImageMap = ({ src, width, height, alt, areas }) => {
                             cursor: 'pointer',
                             stroke:
                                 selectedArea.includes(area.title) || highlightedArea === area
-                                    ? '2px solid red'
+                                    ? '2px solid #000000'
                                     : 'none',
                             fill:
                                 selectedArea.includes(area.title) || highlightedArea === area
-                                    ? area.colorArea
+                                    ? 'rgba(207, 119, 35, 0.60)'
                                     : 'transparent',
                         }}
                     />
