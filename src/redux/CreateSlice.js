@@ -3,17 +3,20 @@ import { createSlice } from '@reduxjs/toolkit';
 const selectedAreaSlice = createSlice({
     name: 'selectedArea',
     initialState: {
-        selectedArea: null,
-        arrayParts: [],
+        selectedAreaParts: [],
     },
     reducers: {
         setSelectedArea: (state, action) => {
-            state.selectedArea = action.payload;
-            state.arrayParts.push(action.payload);
+            if (!state.selectedAreaParts.includes(action.payload)) {
+                state.selectedAreaParts.push(action.payload);
+            } else {
+                state.selectedAreaParts = state.selectedAreaParts.filter(
+                    area => area !== action.payload,
+                );
+            }
         },
         clearSelectedArea: state => {
-            state.selectedArea = null;
-            state.arrayParts = [];
+            state.selectedAreaParts = [];
         },
     },
 });

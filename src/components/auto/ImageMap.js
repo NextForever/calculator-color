@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setSelectedArea } from '../../redux/CreateSlice';
 
 const ImageMap = ({ src, width, height, alt, areas }) => {
-    const selectedArea = useSelector(state => state.selectedArea.selectedArea);
+    const selectedArea = useSelector(state => state.selectedArea.selectedAreaParts);
     const dispatch = useDispatch();
 
     const [highlightedArea, setHighlightedArea] = useState(null);
@@ -11,13 +11,8 @@ const ImageMap = ({ src, width, height, alt, areas }) => {
     const handleMouseLeave = () => setHighlightedArea(null);
 
     const handleClick = (event, area) => {
-        console.log(area.title);
         event.preventDefault();
-        if (selectedArea === area) {
-            dispatch(setSelectedArea(null));
-        } else {
-            dispatch(setSelectedArea(area));
-        }
+        dispatch(setSelectedArea(area.title));
     };
 
     return (
@@ -46,11 +41,11 @@ const ImageMap = ({ src, width, height, alt, areas }) => {
                         style={{
                             cursor: 'pointer',
                             stroke:
-                                selectedArea === area || highlightedArea === area
+                                selectedArea.includes(area.title) || highlightedArea === area
                                     ? '2px solid red'
                                     : 'none',
                             fill:
-                                selectedArea === area || highlightedArea === area
+                                selectedArea.includes(area.title) || highlightedArea === area
                                     ? area.colorArea
                                     : 'transparent',
                         }}
