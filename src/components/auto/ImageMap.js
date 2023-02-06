@@ -1,20 +1,19 @@
 import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { setSelectedArea } from '../../redux/CreateSlice';
 
 const ImageMap = ({ src, width, height, alt, areas }) => {
-    const [selectedArea, setSelectedArea] = useState(null);
+    const selectedArea = useSelector(state => state.selectedArea.selectedArea);
+    const dispatch = useDispatch();
+
     const [highlightedArea, setHighlightedArea] = useState(null);
     const handleMouseEnter = area => setHighlightedArea(area);
     const handleMouseLeave = () => setHighlightedArea(null);
+
     const handleClick = (event, area) => {
-        event.preventDefault();
         console.log(area.title);
-        if (selectedArea === area) {
-            setSelectedArea(null);
-        } else {
-            setSelectedArea(area);
-        }
-        // тут должен быть обработчик событий на каждую деталь машины state , данные будем получать из Store
-        // и использовать redux-toolkit
+        event.preventDefault();
+        dispatch(setSelectedArea(area));
     };
 
     return (

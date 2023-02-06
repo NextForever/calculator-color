@@ -13,7 +13,6 @@ const AreaImage = () => {
                     src={hatchback}
                     width='800px'
                     height='600px'
-                    alt='Image Map'
                     areas={[
                         {
                             coords: [
@@ -23,7 +22,7 @@ const AreaImage = () => {
                             ],
 
                             alt: 'left door',
-                            title: 'left door',
+                            title: 'LeftDoor',
                             colorArea: 'rgb(207, 119, 35)',
                         },
                         {
@@ -33,7 +32,7 @@ const AreaImage = () => {
                             ],
 
                             alt: 'hood',
-                            title: 'hood',
+                            title: 'Hood',
                             colorArea: 'rgb(207, 119, 35)',
                         },
                         {
@@ -44,7 +43,7 @@ const AreaImage = () => {
                             ],
 
                             alt: 'left wing',
-                            title: 'left wing',
+                            title: 'LeftWing',
                             colorArea: 'rgb(207, 119, 35)',
                         },
                     ]}
