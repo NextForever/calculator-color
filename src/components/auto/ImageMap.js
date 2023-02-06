@@ -13,7 +13,11 @@ const ImageMap = ({ src, width, height, alt, areas }) => {
     const handleClick = (event, area) => {
         console.log(area.title);
         event.preventDefault();
-        dispatch(setSelectedArea(area));
+        if (selectedArea === area) {
+            dispatch(setSelectedArea(null));
+        } else {
+            dispatch(setSelectedArea(area));
+        }
     };
 
     return (
