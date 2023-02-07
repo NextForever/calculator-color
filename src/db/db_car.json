@@ -1,0 +1,42 @@
+{
+    "car": [
+        {
+            "id": 1,
+            "type": "Sedan",
+            "src": "img/id_user/sedan.jpg",
+            "description": "any text",
+            "picture_size_width": "800",
+            "picture_size_height": "600",
+            "color_fill": "rgba(255, 255, 255, 0.6",
+            "detail_EN": [
+                {
+                    "coords:": ["142", "366", "259"],
+                    "alt": { "EN": "Bumper", "RU": "бампер", "FR": "pare-chocs" }
+                },
+                {
+                    "coords:": ["466", "700", "787"],
+                    "alt": { "EN": "Bumper", "RU": "левая дверь", "FR": "porte gauche" }
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "type": "Coupe",
+            "src": "img/id_user/coupe.jpg",
+            "description": "any text",
+            "picture_size_width": "800",
+            "picture_size_height": "600",
+            "color_fill": "rgba(255, 255, 255, 0.6",
+            "detail_EN": [
+                {
+                    "coords:": ["142", "366", "259"],
+                    "alt": { "EN": "Bumper", "RU": "бампер", "FR": "pare-chocs" }
+                },
+                {
+                    "coords:": ["466", "700", "787"],
+                    "alt": { "EN": "Bumper", "RU": "левая дверь", "FR": "porte gauche" }
+                }
+            ]
+        }
+    ]
+}

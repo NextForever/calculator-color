@@ -10,10 +10,23 @@
         display: grid;
         width: 1200px;
         margin: 0 auto;
-        grid: 1fr / 2fr 2fr 1fr 1fr;
+        grid: 1fr / 2fr 3fr 1fr;
         gap: 5px;
         justify-content: center;
         align-items: center;
         justify-items: start;
+    }
+    .menu {
+        display: flex;
+        justify-content: space-between;
+        font-size: 20px;
+
+        li {
+            margin-right: 25px;
+            a {
+                text-decoration: none;
+                color: #fff;
+            }
+        }
     }
 }
