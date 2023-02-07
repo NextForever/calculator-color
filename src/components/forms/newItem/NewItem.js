@@ -1,5 +1,5 @@
 import { Button, Container, Grid, TextField } from '@mui/material';
-import { useState, useRef } from 'react';
+import { useState, useRef, Fragment } from 'react';
 
 import './newItem.scss';
 
@@ -7,6 +7,8 @@ const NewItem = () => {
     const [imagePreview, setImagePreview] = useState(null);
     const [imageDimensions, setImageDimensions] = useState(null);
     const [coords, setCoords] = useState([]);
+    const [polygonClicked, setPolygonClicked] = useState(false);
+    const [circleClicked, setCircleClicked] = useState([]);
     const imgViewRef = useRef(null);
 
     const handleImageChange = e => {
@@ -34,15 +36,30 @@ const NewItem = () => {
         reader.readAsDataURL(file);
     };
 
+    const handleClick = e => {
+        if (e.target.nodeName === 'circle') {
+            let currentCircleIndex = e.target.getAttribute('data-coord-index');
+            let currentCircleClicked = circleClicked;
+            if (!currentCircleClicked[currentCircleIndex]) {
+                currentCircleClicked[currentCircleIndex] = true;
+                setCircleClicked(currentCircleClicked);
+            }
+        } else if (e.target.nodeName === 'polygon') {
+            if (!polygonClicked) {
+                setPolygonClicked(true);
+            }
+        }
+    };
+
     const handleMouseDown = e => {
         if (!imgViewRef.current.contains(e.target)) {
             return;
         }
 
-        const newCoords = [...coords, [e.clientX, e.clientY]];
+        const newCoords = [...coords, [e.nativeEvent.offsetX, e.nativeEvent.offsetY]];
         setCoords(newCoords);
     };
-
+    const polygonPoints = coords.map(coord => coord.join(',')).join(',');
     return (
         <Container>
             <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
@@ -74,6 +91,41 @@ const NewItem = () => {
                             onMouseDown={handleMouseDown}
                         >
                             {imagePreview && <img src={imagePreview} alt='img' width='100%' />}
+                            <svg
+                                style={{
+                                    position: 'absolute',
+                                    inset: '0px',
+                                    height: '100%',
+                                    width: '100%',
+                                }}
+                            >
+                                <polygon
+                                    points={polygonPoints}
+                                    style={{
+                                        stroke: 'none',
+                                        fill: 'rgba(207, 119, 35, 0.60)',
+                                        cursor: 'pointer',
+                                    }}
+                                ></polygon>
+                                {coords.map((coord, index) => (
+                                    <circle
+                                        key={index}
+                                        cx={coord[0]}
+                                        cy={coord[1]}
+                                        r={5}
+                                        className='image-mapper-point'
+                                        data-area-index={0}
+                                        data-coord-index={0}
+                                        style={{
+                                            fill: 'rgb(255, 255, 255)',
+                                            stroke: 'rgb(51, 51, 51)',
+                                            strokeWidth: 1,
+                                            opacity: 0.6,
+                                            cursor: 'pointer',
+                                        }}
+                                    />
+                                ))}
+                            </svg>
                         </div>
                     )}
                 </Grid>
@@ -88,13 +140,7 @@ const NewItem = () => {
                         />
                     )}
 
-                    <div class='result'>
-                        {coords.map((coord, index) => (
-                            <div key={index}>
-                                {coord[0]},{coord[1]},
-                            </div>
-                        ))}
-                    </div>
+                    <span className='result'>{polygonPoints}</span>
 
                     {imagePreview && (
                         <Button variant='contained' id='paint'>
