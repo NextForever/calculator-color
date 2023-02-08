@@ -1,5 +1,5 @@
-import { Button, Container, Grid, TextField } from '@mui/material';
-import { useState, useRef, Fragment } from 'react';
+import { Button, Container, Grid,TextField } from '@mui/material';
+import { useState, useRef } from 'react';
 
 import './newItem.scss';
 
@@ -51,6 +51,9 @@ const NewItem = () => {
         }
     };
 
+    const showPolygon = () => {
+        console.log(polygonPoints);
+    };
     const handleMouseDown = e => {
         if (!imgViewRef.current.contains(e.target)) {
             return;
@@ -70,16 +73,15 @@ const NewItem = () => {
                     </Button>
                 </Grid>
                 <Grid item xs={10}>
-                    {imageDimensions && (
-                        <div>
-                            Image dimensions: {imageDimensions.width} x{imageDimensions.height}
-                        </div>
-                    )}
+                    {/* <div>
+                        Image dimensions: {imageDimensions.width} x{imageDimensions.height}
+                    </div> */}
+                    111
                 </Grid>
             </Grid>
-            <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-                <Grid item xs={10}>
-                    {imagePreview && imageDimensions && (
+            {imagePreview && imageDimensions && (
+                <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+                    <Grid item xs={10}>
                         <div
                             className='img-view'
                             style={{
@@ -90,7 +92,7 @@ const NewItem = () => {
                             ref={imgViewRef}
                             onMouseDown={handleMouseDown}
                         >
-                            {imagePreview && <img src={imagePreview} alt='img' width='100%' />}
+                            <img src={imagePreview} alt='img' width='100%' />
                             <svg
                                 style={{
                                     position: 'absolute',
@@ -127,28 +129,26 @@ const NewItem = () => {
                                 ))}
                             </svg>
                         </div>
-                    )}
-                </Grid>
-                <Grid item xs={2}>
-                    <span className='title-editeble'>Инструменты выделения областей</span>
-                    {imagePreview && (
+                    </Grid>
+                    <Grid item xs={2}>
+                        <span className='title-editeble'>Инструменты выделения областей</span>
+
                         <TextField
                             fullWidth
                             label='Название детали'
                             id='fullWidth'
                             className='title-editeble'
                         />
-                    )}
 
-                    <span className='result'>{polygonPoints}</span>
-
-                    {imagePreview && (
                         <Button variant='contained' id='paint'>
                             Сохранить
                         </Button>
-                    )}
+                        <Button variant='contained' mr={3} onClick={showPolygon}>
+                            показать координаты
+                        </Button>
+                    </Grid>
                 </Grid>
-            </Grid>
+            )}
         </Container>
     );
 };

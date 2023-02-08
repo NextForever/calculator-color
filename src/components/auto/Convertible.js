@@ -26,6 +26,11 @@ const Convertible = () => {
                     alt: 'convertible Bumper',
                     title: 'convertible Bumper',
                 },
+                {
+                    coords: [80, 349, 217, 377, 220, 402, 82, 371],
+                    alt: 'порог левый',
+                    title: 'порог левый',
+                },
             ]}
         />
     );
